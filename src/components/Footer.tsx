@@ -65,9 +65,13 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-          <p className="text-gray-500 text-sm">
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <p className="text-gray-500 text-sm text-center mb-4">
             &copy; {currentYear} SnapShare. All rights reserved.
+          </p>
+          <p className="text-gray-400 text-xs text-center max-w-2xl mx-auto">
+            Mit der Eintragung in unsere Warteliste stimmst du zu, dass wir deine E-Mail-Adresse speichern und dich über die Verfügbarkeit der App informieren. 
+            Du kannst dich jederzeit abmelden. Weitere Informationen findest du in unserer <a href="#" className="underline hover:text-brand-purple">Datenschutzerklärung</a>.
           </p>
         </div>
       </div>
