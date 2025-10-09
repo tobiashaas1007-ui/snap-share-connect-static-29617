@@ -21,15 +21,6 @@ const Header = () => {
           <Link to="/about" className="text-sm font-medium text-gray-600 hover:text-brand-purple transition-colors">About</Link>
           <a href="#download" className="text-sm font-medium text-gray-600 hover:text-brand-purple transition-colors">Download</a>
         </nav>
-        
-        <div>
-          <Button 
-            variant="default" 
-            className="bg-gradient-to-r from-brand-gradient-start to-brand-gradient-end hover:opacity-90 transition-opacity"
-          >
-            Download Now
-          </Button>
-        </div>
       </div>
     </header>
   );

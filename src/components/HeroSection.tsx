@@ -71,7 +71,7 @@ const HeroSection = () => {
           {/* Text content */}
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-              Erhalte automatisch <span className="bg-gradient-to-r from-brand-gradient-start to-brand-gradient-end text-transparent bg-clip-text">alle Fotos</span>, auf denen du bist
+              Erhalte automatisch <span className="bg-gradient-to-r from-brand-gradient-start to-brand-gradient-end text-transparent bg-clip-text">alle Fotos von deinen Freunden</span>, auf denen du bist
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto lg:mx-0">
@@ -95,23 +95,6 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* App preview image */}
-          <div className="flex-1 relative">
-            <div className="relative z-10 animate-float">
-              <div className="bg-white rounded-3xl p-2 shadow-2xl">
-                <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl aspect-[9/19] w-full max-w-xs mx-auto overflow-hidden">
-                  {/* Placeholder for app screenshot */}
-                  <div className="w-full h-full bg-gradient-to-br from-brand-gradient-start/80 to-brand-gradient-end/80 flex items-center justify-center">
-                    <span className="text-white text-xl font-medium">App Preview</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Decorative elements */}
-            <div className="absolute top-1/4 -right-8 w-16 h-16 rounded-full bg-brand-lightPurple/30 animate-pulse-soft"></div>
-            <div className="absolute bottom-1/3 -left-4 w-8 h-8 rounded-full bg-brand-purple/20 animate-pulse-soft"></div>
-          </div>
         </div>
       </div>
 
