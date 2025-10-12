@@ -5,27 +5,27 @@ import { Check, X } from "lucide-react";
 const ComparisonSection = () => {
   const comparisons = [
     {
-      feature: "Automatische Gesichtserkennung",
+      feature: "Erkennt dich automatisch auf Fotos",
       ours: true,
       others: false
     },
     {
-      feature: "Alle deine Fotos an einem Ort",
+      feature: "Schickt dir alle Bilder, auf denen du bist",
       ours: true,
       others: false
     },
     {
-      feature: "Nur relevante Bilder",
+      feature: "Teilt Fotos automatisch mit Freunden",
       ours: true,
       others: false
     },
     {
-      feature: "Keine manuellen Anfragen nötig",
+      feature: "Kein manuelles Nachfragen nötig",
       ours: true,
       others: false
     },
     {
-      feature: "Sofortiger Zugriff",
+      feature: "Designed für echte Momente, nicht Daten",
       ours: true,
       others: false
     }
@@ -36,18 +36,18 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Warum wir anders sind
+            Warum du SnapShare lieben wirst – und nie wieder Google Fotos oder WhatsApp brauchst
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Im Vergleich zu Google Fotos, WhatsApp und anderen Sharing-Tools
+            Andere Apps speichern Fotos. SnapShare versteht sie – und weiß, welche für dich wichtig sind.
           </p>
         </div>
         
         <Card className="max-w-3xl mx-auto overflow-hidden">
           <div className="grid grid-cols-3 bg-gradient-to-r from-brand-gradient-start to-brand-gradient-end text-white font-semibold">
             <div className="p-4 col-span-1"></div>
-            <div className="p-4 text-center border-l border-white/20">Unsere App</div>
-            <div className="p-4 text-center border-l border-white/20">Andere Tools</div>
+            <div className="p-4 text-center border-l border-white/20">SnapShare</div>
+            <div className="p-4 text-center border-l border-white/20">Andere Apps</div>
           </div>
           
           {comparisons.map((item, index) => (
