@@ -17,11 +17,12 @@ const HeroSection = () => {
   const [selectedStore, setSelectedStore] = useState<'app_store' | 'play_store'>('app_store');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { trackDownloadClick, joinWaitlist } = useAnalytics();
+  const { trackDownloadClick, trackButtonClick, joinWaitlist } = useAnalytics();
   const { toast } = useToast();
 
   const handleDownloadClick = (store: 'app_store' | 'play_store') => {
     trackDownloadClick(store);
+    trackButtonClick(`download_${store}`, { store_type: store });
     setSelectedStore(store);
     setDialogOpen(true);
   };
@@ -39,6 +40,7 @@ const HeroSection = () => {
     }
 
     setIsSubmitting(true);
+    trackButtonClick('waitlist_submit', { email, source: selectedStore });
     const result = await joinWaitlist(email, selectedStore);
     setIsSubmitting(false);
 

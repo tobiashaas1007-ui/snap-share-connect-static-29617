@@ -5,12 +5,40 @@ export type AnalyticsEventType =
   | 'page_view' 
   | 'app_store_click' 
   | 'play_store_click' 
-  | 'waitlist_signup';
+  | 'waitlist_signup'
+  | 'session_start'
+  | 'session_end'
+  | 'button_click';
 
 export const useAnalytics = () => {
-  // Track page view on mount
+  // Track session start and duration
   useEffect(() => {
+    const sessionStart = Date.now();
+    
+    trackEvent('session_start', { 
+      url: window.location.pathname,
+      timestamp: new Date().toISOString()
+    });
+
     trackEvent('page_view', { url: window.location.pathname });
+
+    // Track session end on unmount or page unload
+    const handleSessionEnd = () => {
+      const sessionDuration = Date.now() - sessionStart;
+      trackEvent('session_end', { 
+        url: window.location.pathname,
+        duration_ms: sessionDuration,
+        duration_seconds: Math.round(sessionDuration / 1000),
+        timestamp: new Date().toISOString()
+      });
+    };
+
+    window.addEventListener('beforeunload', handleSessionEnd);
+
+    return () => {
+      handleSessionEnd();
+      window.removeEventListener('beforeunload', handleSessionEnd);
+    };
   }, []);
 
   const trackEvent = async (eventType: AnalyticsEventType, metadata?: Record<string, any>) => {
@@ -28,7 +56,19 @@ export const useAnalytics = () => {
 
   const trackDownloadClick = (store: 'app_store' | 'play_store') => {
     const eventType = store === 'app_store' ? 'app_store_click' : 'play_store_click';
-    trackEvent(eventType, { store });
+    trackEvent(eventType, { 
+      store,
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  const trackButtonClick = (buttonName: string, additionalData?: Record<string, any>) => {
+    trackEvent('button_click', {
+      button_name: buttonName,
+      timestamp: new Date().toISOString(),
+      url: window.location.pathname,
+      ...additionalData
+    });
   };
 
   const joinWaitlist = async (email: string, source: string) => {
@@ -47,5 +87,5 @@ export const useAnalytics = () => {
     }
   };
 
-  return { trackEvent, trackDownloadClick, joinWaitlist };
+  return { trackEvent, trackDownloadClick, trackButtonClick, joinWaitlist };
 };
