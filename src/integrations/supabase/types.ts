@@ -20,18 +20,24 @@ export type Database = {
           event_type: string
           id: string
           metadata: Json | null
+          session_id: string | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string
           event_type: string
           id?: string
           metadata?: Json | null
+          session_id?: string | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string
           event_type?: string
           id?: string
           metadata?: Json | null
+          session_id?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }

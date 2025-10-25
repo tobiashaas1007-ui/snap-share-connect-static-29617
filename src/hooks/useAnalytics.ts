@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type AnalyticsEventType = 
   | 'page_view' 
@@ -11,6 +11,28 @@ export type AnalyticsEventType =
   | 'button_click';
 
 export const useAnalytics = () => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [sessionId] = useState<string>(() => {
+    // Generate unique session ID for anonymous users
+    return `session_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+  });
+
+  // Get current user ID
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUserId(user?.id || null);
+    };
+    getUser();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserId(session?.user?.id || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   // Track session start and duration
   useEffect(() => {
     const sessionStart = Date.now();
@@ -52,7 +74,9 @@ export const useAnalytics = () => {
         .from('analytics_events')
         .insert({
           event_type: eventType,
-          metadata: metadata || {}
+          metadata: metadata || {},
+          user_id: userId,
+          session_id: sessionId
         });
     } catch (error) {
       console.error('Analytics tracking error:', error);
