@@ -14,13 +14,18 @@ export const useAnalytics = () => {
   // Track session start and duration
   useEffect(() => {
     const sessionStart = Date.now();
+    let hasTrackedSession = false;
     
-    trackEvent('session_start', { 
-      url: window.location.pathname,
-      timestamp: new Date().toISOString()
-    });
-
-    trackEvent('page_view', { url: window.location.pathname });
+    // Only track once per session
+    if (!hasTrackedSession) {
+      hasTrackedSession = true;
+      
+      // Track combined session_start with page_view data
+      trackEvent('session_start', { 
+        url: window.location.pathname,
+        timestamp: new Date().toISOString()
+      });
+    }
 
     // Track session end on unmount or page unload
     const handleSessionEnd = () => {
